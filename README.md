@@ -1,16 +1,5 @@
-…or create a new repository on the command line---------------------------------------------------
+<h1>Une application de gestion des multiservices du senegal pour tout en un</h1>
 
-echo "# Laravel-8-AdminLTE3-Gestion-RH-Mairie" >> README.md
-  git init
-  git add README.md
-  git commit -m "first commit"
-  git branch -M main
-  git remote add origin https://github.com/malado04/Laravel-Gestion-multiservice
-  git push -u origin main
-
-
-  …or push an existing repository from the command line---------------------------------------------------
-
-git remote set-url origin https://github.com/malado04/Laravel-Gestion-multiservice
-  git branch -M master
-  git push -u origin master
+Un seul compte pour tous les services !
+Ouvrez votre Multiservice SMS
+qui permet d’accepter tous les moyens de paiement et de distribuer un large catalogue de services digitaux en toute sécurité.

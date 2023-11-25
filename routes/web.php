@@ -55,6 +55,11 @@ use App\Models\Zone;
 // });
  
 
+Route::get('/dashboard', function () {
+    return view('auth.login');
+});
+
+
 Route::get('/', function () {
     return view('auth.login');
 });
