@@ -44,12 +44,12 @@ return [
     |
     
 */
-    'logo' => '<b>  IPM-IEZ</b><br>',
+    'logo' => '<b>  SMS</b><br>',
     'logo_img' => 'images/usim.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-5',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xl',
-    'logo_img_alt' => '<br> IPM',
+    'logo_img_alt' => '<br> SMS',
 
     /*
     |--------------------------------------------------------------------------
@@ -326,7 +326,7 @@ return [
                 ['header' => 'labels'],
                     'text'    => 'Soldes caisses',
                     'label_color' => 'success',
-                    'icon'    => 'fas fa-fw fa-cash-register',
+                    'icon'    => 'fas fa-fw fa-money-bill',
                     'icon_color' => 'yellow',
                     'submenu' => [
                         [

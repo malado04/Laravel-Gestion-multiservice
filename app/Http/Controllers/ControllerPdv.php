@@ -61,22 +61,23 @@ class ControllerPdv extends Controller
 
             $zone = Zone::where('id', $request['fk_zone_id'][0])->get();
             
-            if (Pdv::where('fk_zone_id', $zone[0]->id)->exists()) {
-                var_dump( $zone );
-                    // return redirect()->route('pdvs.create')
-                    //     ->with('error_message', 'Cette zone existe déja, veuillez utiliser une autre svp');
-
-            }
-
-            Pdv::create([
-                'fk_zone_id' => $request['fk_zone_id'][0],
-                'nom_pdv' => $request['nom_pdv'],
-                'fk_sup_id' => Auth::user()->id,
-            ]);
-
-            return redirect()->route('pdvs.index')
-                ->with('success_message', 'Zone créer avec success');
+            if (Pdv::where('nom_pdv', $request['nom_pdv'])->where('fk_zone_id', $request['fk_zone_id'][0])->exists()) {
                 
+                $pdv = Pdv::where('fk_zone_id', $request['fk_zone_id'][0])->get();
+                    return redirect()->route('pdvs.create')
+                        ->with('error_message', 'Cette point de vente existe déja, veuillez utiliser une autre svp');
+
+            }else{
+
+                Pdv::create([
+                    'fk_zone_id' => $request['fk_zone_id'][0],
+                    'nom_pdv' => $request['nom_pdv'],
+                    'fk_sup_id' => Auth::user()->id,
+                ]);
+
+                return redirect()->route('pdvs.index')
+                    ->with('success_message', 'Zone créer avec success');
+            }
         } 
 
     }
@@ -150,7 +151,7 @@ class ControllerPdv extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        $pdv = Zone::find($id);
+        $pdv = Pdv::find($id);
         if ($pdv) $pdv->delete();
         return redirect()->route('pdvs.index')
             ->with('success_message', 'Supprimée');

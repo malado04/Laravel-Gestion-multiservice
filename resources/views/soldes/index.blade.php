@@ -15,7 +15,9 @@
             <div class="card">
                 <div class="card-header bg-info">
                     <h1 class="m-0 text-black text-white"><i class="fa fa-list"> </i> Liste des soldes
-                        <a href="{{route('soldes.create')}}" class="btn btn-info mb-2 border border-radius border-2 border-white" style="float:right;"> <i class="fa fa-plus"></i>
+                        <a href="{{route('soldes.create')}}" class="btn btn-info mb-2 border border-radius border-2 border-white" style="float:right;"> 
+                            <i class="fa fa-plus"></i> 
+                            <i class="fa fa-money-bill"></i>
                              Solde
                         </a>
      
@@ -29,22 +31,34 @@
                                 <th>PDV </th>
                                 <th>Caisse </th>
                                 <th>Montant Solde </th>
-                               <!--  <th class="btn-success"><i class="fa fa-eye"> </i></th>
-                                <th class="btn-primary"><i class="fa fa-edit"> </i></th>
-                                <th class="btn-danger"><i class="fa fa-trash"> </i></th> -->
+                                <th class="btn-outline-success"><i class="fa fa-eye"> </i></th>
+                                <th class="btn-outline-primary"><i class="fa fa-edit"> </i></th>
+                                <th class="btn-outline-danger"><i class="fa fa-trash"> </i></th>
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($soldes as $key => $cai)
+                        @foreach($soldes as $key => $sol)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{optional($cai->caisse)->pdv->nom_pdv}}</td>
-                                <td>{{optional($cai->caisse)->libelle}}</td>
-                                <td>{{$cai->montant}}</td>
+                                <td>{{optional($sol->caisse)->pdv->nom_pdv}}</td>
+                                <td>{{optional($sol->caisse)->libelle}}</td>
+                                <td>{{$sol->montant}}</td>
                                 <td  style="text-align: center;">
-                                    <a href="{{route('zones.show', $cai)}}" class="btn btn-success btn-xs">
+                                    <a href="{{route('soldes.show', $sol)}}" class="btn btn-outline-success btn-xs">
                                         <i class="fa fa-eye"> </i> 
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-money-bill"></i>
+                                    </a>
+                                </td>
+                                <td  style="text-align: center;">
+                                    <a href="{{route('soldes.edit', $sol)}}" class="btn btn-outline-primary btn-xs">
+                                        <i class="fa fa-edit"> </i> 
+                                        <i class="fa fa-money-bill"></i>
+                                    </a>
+                                </td>
+                                <td  style="text-align: center;">
+                                    <a href="{{route('soldes.destroy', $sol)}}" class="btn btn-outline-danger btn-xs">
+                                        <i class="fa fa-trash"> </i> 
+                                        <i class="fa fa-money-bill"></i>
                                     </a>
                                 </td>
                             </tr>

@@ -14,16 +14,16 @@ class Solde extends Model
             'id', 
             'montant', 
             'fk_caisse_id', 
-            'fk_solde_id', 
+            'fk_service_id', 
             'act', 
             'fk_sup_id', 
             'fk_up_id', 
         ];
 
-    public function solde()
-    {
-        return $this->belongsTo(Solde::class, 'fk_solde_id', 'id');
-    }
+    // public function solde()
+    // {
+    //     return $this->belongsTo(Service::class, 'fk_service_id', 'id');
+    // }
 
     public function caisse()
     {

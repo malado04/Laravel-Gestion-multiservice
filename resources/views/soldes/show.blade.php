@@ -1,14 +1,18 @@
 @extends('adminlte::page')
-@section('title', 'Affichage service')  
+@section('title', 'Affichage solde')  
 @section('content')<br>
     <div class="row">
         <div class="col-12">    
             <div class="card">
                 <div class="card-header bg-info text-white">
                     <h1 class="m-0 text-black"> <i class="img-circle p-2 fas fa-fw fa-info border border-white"></i>  {{$cai->libelle}} 
-                        <a href="{{route('caisses.show', $cai->id)}}" class="btn btn-danger" style="float: right;">
+                        <a href="{{route('caisses.index')}}" class="m-3 btn btn-success" style="float: right;">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
-                            <i class="fas fa-list"></i> Caisses
+                            <i class="fas fa-list"></i> Liste des caisses
+                        </a>
+                        <a href="{{route('caisses.show', $cai)}}" class="m-3 btn btn-danger" style="float: right;">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            <i class="fas fa-list"></i> Retour
                         </a>
                     </h1>
                 </div>
@@ -17,10 +21,8 @@
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-8">
-                      
-                        <fieldset class="container  bg-warning p-4">
-                            <legend class=" bg-dark text-warning p-2" style="width: 100%;">Solde initial : {{$sol->montant ?? $sol->montant}} - Montant Actuel : {{$sol->montant + $sum_opres[0]->sum_montant - $sum_opdes[0]->sum_montant}}</legend>  
-                            <form action="{{route('operations.store')}}" method="post" >
+                      <fieldset class="container  bg-warning p-4">
+                            <form action="{{route('soldes.store')}}" method="post" >
                             @csrf
                             <div class="row">
                                 <div class="col-md-4">
@@ -33,7 +35,7 @@
                                         @foreach($servs as $key => $serv)
                                             <option value="{{$serv->id}}">{{$serv->libelle}}</option>
                                         @endforeach
-                                    </select>
+                                    </select> 
                                 </div>
                                 <div class="col-md-4">
                                     <label>Opération</label>
@@ -42,7 +44,13 @@
                                             <option value="Retrait">Retrait</option>
                                         </optgroup>
                                         <optgroup label="Depot">
-                                            <option value="Depot">Depot</option>
+                                            <option value="Depot">Dépot</option>
+                                        </optgroup>
+                                        <optgroup label="Retrait avec code">
+                                            <option value="Retrait avec code">Retrait avec code</option>
+                                        </optgroup>
+                                        <optgroup label="Depot avec code">
+                                            <option value="Depot avec code">Dépot avec code</option>
                                         </optgroup>
                                     </select>
                                 </div>
@@ -52,18 +60,21 @@
                             <input type="submit" name="" value="Enregistrer" class="form-control bg-white text-warning">
                         </form>
                         </fieldset>
+                      
                     </div>
                 </div> <br><br>
                 <div class="row">
                     <div class="col-md-6">
                         <fieldset class="container border-warning" style="border: 1px solid; border-radius: 3px">
-                            <legend class="bg-dark p-2 text-white" style="width: 50%; border-radius: 3px;">Dépot : {{$sum_opdes[0]->sum_montant}} </legend>
+                            <legend class="bg-dark p-2 text-white" style="width: 50%; border-radius: 3px;">Dépot : 
+                                     {{$sum_opdes}}
+                              </legend>
                                 <table class="table table-hover table-bordered table-stripped" id="example1">
                                        <thead>
                                            <th>Service</th>
                                            <th>Montant</th>
-                                           <!-- <th>Opération</th> -->
-                                           <th>Commission</th>
+                                           <!-- <th>Commission</th> -->
+                                           <th>Opération</th>
                                        </thead>
                                        <tbody>
                                         @foreach($opdes as $key => $op)
@@ -80,13 +91,15 @@
                     </div>
                     <div class="col-md-6">
                         <fieldset class="container border-warning" style="border: 1px solid; border-radius: 3px">
-                            <legend class="bg-dark p-2 text-white" style="width: 50%; border-radius: 3px;">Retrait : {{$sum_opres[0]->sum_montant}} </legend>
+                            <legend class="bg-dark p-2 text-white" style="width: 50%; border-radius: 3px;">Retrait :
+                                    {{$sum_opres}}
+                            </legend>
                                 <table class="table table-hover table-bordered table-stripped" id="example2">
                                        <thead>
                                            <th>Service</th>
                                            <th>Montant</th>
-                                           <!-- <th>Opération</th> -->
-                                           <th>Commission</th>
+                                           <!-- <th>Commission</th> -->
+                                           <th>Opération</th>
                                        </thead>
                                        <tbody>
                                         @foreach($opres as $key => $op)
