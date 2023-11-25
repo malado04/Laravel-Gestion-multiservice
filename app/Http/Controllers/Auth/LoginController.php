@@ -17,16 +17,10 @@ class LoginController extends Controller
             return '/home';
         }
         if (auth()->user()->admin == 1) {
-            return '/home_lead';
+            return '/home_ger';
         }
         if (auth()->user()->admin == 2) {
-            return '/home_sup';
-        }
-        if (auth()->user()->admin == 3) {
             return '/home_agent';
-        }
-        if (auth()->user()->admin == 4) {
-            return '/home';
         }
         return '/home';
     }

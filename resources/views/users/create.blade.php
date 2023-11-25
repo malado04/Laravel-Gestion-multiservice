@@ -142,11 +142,8 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail">Point de vente d'affectation <span><sup class="text-danger">(*)</sup></span></label>
                                 <select name="fk_pdv_id" id="fk_pdv_id" class="form-control">
-                                   <!--  <optgroup label="Direction Générale">
-                                        <option value="Direction Générale">Direction Générale</option>
-                                    </optgroup> -->
                                     <?php foreach ($pdvs as $key => $pdv): ?>
-                                    <optgroup label="{{$pdv->nom_pdv}}" required>
+                                    <optgroup label="{{optional($pdv->zone)->nom_zone}} - {{$pdv->nom_pdv}}" required>
                                         <option value="{{$pdv->id}}" required>{{$pdv->nom_pdv}}</option>
                                     </optgroup>
                                     <?php endforeach ?>

@@ -274,7 +274,7 @@ return [
             'icon'  => 'fas fa-tachometer-alt',
             'text'  => 'Tableau de bord',
             'icon_color' => 'red',
-            'route' => 'dashboard',
+            'route' => 'home',
         ],
         ['header' => "Parametres",
             'can' => 'admin-access',

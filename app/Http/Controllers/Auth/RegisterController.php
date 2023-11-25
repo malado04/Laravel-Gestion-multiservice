@@ -21,7 +21,7 @@ class RegisterController extends Controller
         if (auth()->user()->admin == 0) {
             return '/home';
         }
-        return '/home_cit';
+        return '/home';
     }
     // protected $redirectTo = RouteServiceProvider::HOME;
 
@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'admin' => 1,
+            'admin' => 0,
         ]);
         return redirect()->route('users.index')
             ->with('success_message', 'Berhasil menambah user baru');

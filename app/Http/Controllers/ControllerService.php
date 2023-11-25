@@ -111,21 +111,13 @@ class ControllerService extends Controller
 
         $Service = Service::find($id);
 
-        if (Service::where('codeserv', $request->codeserv)->exists()) {
-
-            return redirect()->route('services.create')
-                ->with('error_message', 'Ce code de service existe déja, veuillez utiliser un autre SVP');
-
-        } else{
-
         $user = Auth::user()->id;
-        $Service->libelle = $request->libelle;
+        $Service->libelle = $request->libelleservice;
         $Service->fk_user_id = $user;
         $Service->save();
 
           return redirect()->route('services.index')
             ->with('success_message', 'Modification éffectué avec success'); //
-        }
     }
 
     /**

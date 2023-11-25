@@ -15,16 +15,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputName">Code du service</label>
-                                <input type="text" class="form-control @error('codeserv') is-invalid @enderror" id="exampleInputName" placeholder="Code du service" name="codeserv"  id="codeserv"  value="{{$service->codeserv ?? old('codeserv')}}" >
-                                @error('codeserv') <span class="text-danger">{{$message}}</span> @enderror
-                            </div> 
-                        </div>
-                        <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputName"><i class="fas fa-fw fa-briefcase"></i> Libellé du service</label>
-                        <input type="text" class="form-control @error('libelleservice') is-invalid @enderror" id="exampleInputName" placeholder="Libellé du service" name="libelleservice" value="{{$service->libelleservice ?? old('libelleservice')}}">
+                        <input type="text" class="form-control @error('libelleservice') is-invalid @enderror" id="exampleInputName" placeholder="Libellé du service" name="libelleservice" value="{{$service->libelle}}">
                         @error('libelleservice') <span class="text-danger">{{$message}}</span> @enderror
                     </div> 
                     </div>

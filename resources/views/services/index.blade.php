@@ -26,9 +26,9 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Libelle </th>
-                                <th class="btn-success"><i class="fa fa-eye"> </i></th>
-                                <th class="btn-primary"><i class="fa fa-edit"> </i></th>
-                                <th class="btn-danger"><i class="fa fa-trash"> </i></th>
+                                <th class="btn-outline-success"><i class="fa fa-eye"> </i></th>
+                                <th class="btn-outline-primary"><i class="fa fa-edit"> </i></th>
+                                <th class="btn-outline-danger"><i class="fa fa-trash"> </i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,17 +37,17 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$service->libelle}}</td>
                                 <td style="width: 5%;">
-                                    <a href="{{route('services.show', $service)}}" class="btn btn-success btn-xs">
+                                    <a href="{{route('services.show', $service)}}" class="btn btn-outline-success btn-xs">
                                         <i class="fa fa-eye"> </i>
                                     </a>
                                 </td>
                                 <td style="width: 5%;">
-                                    <a style="text-align:center;" href="{{route('services.edit', $service)}}" class="btn btn-primary btn-xs">
+                                    <a style="text-align:center;" href="{{route('services.edit', $service)}}" class="btn btn-outline-primary btn-xs">
                                         <i class="fa fa-edit"> </i>
                                     </a>
                                 </td>
                                 <td style="width: 5%;">
-                                    <a style="float: right;" href="{{route('services.destroy', $service)}}" onclick="notificationBeforeDelete(event, this)" class="btn btn-danger btn-xs">
+                                    <a style="float: right;" href="{{route('services.destroy', $service)}}" onclick="notificationBeforeDelete(event, this)" class="btn btn-outline-danger btn-xs">
                                         <i class="fa fa-trash"> </i>
                                     </a>
                                 </td>
