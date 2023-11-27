@@ -25,6 +25,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
+                                <th>Logo </th>
                                 <th>Libelle </th>
                                 <th class="btn-outline-success"><i class="fa fa-eye"> </i></th>
                                 <th class="btn-outline-primary"><i class="fa fa-edit"> </i></th>
@@ -35,6 +36,9 @@
                         @foreach($services as $key => $service)
                             <tr>
                                 <td>{{$key+1}}</td>
+                                <td style="width: 10%;">
+                                   <img src="storage/{{$service->file}}" style="width: 50%;">
+                                </td>
                                 <td>{{$service->libelle}}</td>
                                 <td style="width: 5%;">
                                     <a href="{{route('services.show', $service)}}" class="btn btn-outline-success btn-xs">

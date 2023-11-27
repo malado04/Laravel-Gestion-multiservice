@@ -12,6 +12,7 @@ class Service extends Model
     protected $fillable = 
         [
             'id', 
+            'file', 
             'libelle', 
             'fk_sup_id', 
             'fk_up_id', 

@@ -27,6 +27,12 @@
                                     <div class="col-md-3">
                                         <label>Type d'opération</label>
                                         <select class="form-control" name="typeoperation">
+                                            <optgroup label="Retrait international">
+                                                <option value="Retrait international">Retrait international</option>
+                                            </optgroup>
+                                            <optgroup label="Dépôt international">
+                                                <option value="Dépôt international">Dépôt international</option>
+                                            </optgroup>
                                             <optgroup label="Retrait">
                                                 <option value="Retrait">Retrait</option>
                                             </optgroup>

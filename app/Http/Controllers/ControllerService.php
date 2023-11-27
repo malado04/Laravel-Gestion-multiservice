@@ -42,7 +42,6 @@ class ControllerService extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user()->id;
 
         if (Service::where('libelle', $request->libelle)->exists()) {
 
@@ -50,10 +49,13 @@ class ControllerService extends Controller
                 ->with('error_message', 'Ce service existe déja, veuillez utiliser un autre SVP');
 
         } else{
+            
+            $user = Auth::user()->id;
+            $path = $request->file('file')->store('uploads');
+            $file=$path ?? "Aucune";
 
             $service = Service::create([
-                // 'chapitre' => $request->chapitre,
-                // 'categorie' => $request->categorie,
+                'file' => $file,
                 'libelle' => $request->libelle,
                 'fk_user_id' => $user,
             ]);

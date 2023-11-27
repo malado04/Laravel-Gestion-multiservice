@@ -16,7 +16,7 @@
                         </a>
                     </h1>
                 </div>
-               <div class="card-body"> 
+               <div class="card-body">
                 <div class="row">
                     <div class="col-md-2">
                     </div>
@@ -30,10 +30,13 @@
                                     <input type="number" name="montant" min="0" class="form-control">
                                 </div>
                                 <div class="col-md-4">
-                                    <label>Service</label>
+                                    <label>Service </label>
                                     <select class="form-control" name="fk_service_id">
                                         @foreach($servs as $key => $serv)
-                                            <option value="{{$serv->id}}">{{$serv->libelle}}</option>
+                                                <!-- <img src="../storage/{{$serv->file}}"> -->
+                                            <option value="{{$serv->id}}">
+                                                {{$serv->libelle}}
+                                            </option>
                                         @endforeach
                                     </select> 
                                 </div>
@@ -66,8 +69,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <fieldset class="container border-warning" style="border: 1px solid; border-radius: 3px">
-                            <legend class="bg-dark p-2 text-white" style="width: 50%; border-radius: 3px;">Dépot : 
-                                     {{$sum_opdes}}
+                                    
+                            <legend class="bg-dark p-2 text-white" style="width: 50%; border-radius: 3px;">Dépot :{{$sum_opdes}} 
                               </legend>
                                 <table class="table table-hover table-bordered table-stripped" id="example1">
                                        <thead>
@@ -79,7 +82,10 @@
                                        <tbody>
                                         @foreach($opdes as $key => $op)
                                         <tr>
-                                            <td>{{optional($op->service)->libelle}}</td>
+                                            <td>
+                                                <img src="../storage/{{optional($op->service)->file}}" style="width: 10%;" > 
+                                                {{optional($op->service)->libelle}}
+                                            </td>
                                             <td>{{$op->montant}}</td>
                                             <!-- <td>{{$op->operation}}</td> -->
                                             <td>{{$op->operation}}</td>
@@ -104,7 +110,10 @@
                                        <tbody>
                                         @foreach($opres as $key => $op)
                                         <tr>
-                                            <td>{{optional($op->service)->libelle}}</td>
+                                            <td>
+                                                <img src="../storage/{{optional($op->service)->file}}" style="width: 10%;" > 
+                                                {{optional($op->service)->libelle}}
+                                            </td>
                                             <td>{{$op->montant}}</td>
                                             <!-- <td>{{$op->operation}}</td> -->
                                             <td>{{$op->operation}}</td>
@@ -118,7 +127,6 @@
                 </div>
                 <div class="card-footer">
                     <!-- <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Enregistrer</button> -->
-                    
                 </div>
             </div>
         </div>

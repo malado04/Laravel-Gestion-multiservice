@@ -16,7 +16,8 @@ class ServiceTable extends Migration
         Schema::create('services', function (Blueprint $table) {
           
             $table->id();  
-            $table->string('libelle')->unique();
+            $table->string('libelle');
+            $table->string('file')->nullable();
             $table->bigInteger('fk_user_id')->nullable();
             $table->bigInteger('fk_up_id')->nullable();
             $table->timestamps();
