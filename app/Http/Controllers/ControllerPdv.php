@@ -1,0 +1,204 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Pdv;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Zone;
+use App\Models\Caisse;
+
+class ControllerPdv extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+   
+      * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+         if (Auth::user()->admin == 0) {
+            $zones = Zone::where("fk_proprio_id", Auth::user()->id)->get();
+            $pdvs = Pdv::where("fk_proprio_id", Auth::user()->id)->get();
+            return view('pdvs.index', [
+                'pdvs' => $pdvs,
+                'zones' => $zones
+            ]);
+        }else if (Auth::user()->admin == 1) {
+            $zones = Zone::where("fk_proprio_id", Auth::user()->fk_proprio_id)->get();
+            $pdvs = Pdv::where("fk_proprio_id", Auth::user()->id)->get();
+            return view('pdvs.index', [
+                'pdvs' => $pdvs,
+                'zones' => $zones
+            ]);
+        } else {
+            $zones = Zone::where("fk_proprio_id", Auth::user()->fk_proprio_id)->get();
+            $pdvs = Pdv::where("fk_proprio_id", Auth::user()->id)->get();
+            return view('pdvs.index', [
+                'pdvs' => $pdvs,
+                'zones' => $zones
+            ]);
+        }
+
+
+        // $zones = Zone::all();
+        // $pdvs = Pdv::all();
+        // return view('pdvs.index', [
+        //     'pdvs' => $pdvs,
+        //     'zones' => $zones
+        // ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        $zones = Zone::where('fk_proprio_id', Auth::user()->id)->get();
+
+        return view('pdvs.create', [
+            'zones' => $zones
+        ]);
+        // return view('pdvs.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        
+        $request->validate([
+            'nom_pdv' => 'required',
+        ]);  
+
+       if (Zone::where('id', $request['fk_zone_id'][0])->exists()) {
+
+            $zone = Zone::where('id', $request['fk_zone_id'][0])->get();
+            
+            if (Pdv::where("fk_proprio_id", Auth::user()->id)->where('nom_pdv', $request['nom_pdv'])->where('fk_zone_id', $request['fk_zone_id'][0])->exists()) {
+                
+                $pdv = Pdv::where('fk_zone_id', $request['fk_zone_id'][0])->get();
+                    return redirect()->route('pdvs.create')
+                        ->with('error_message', 'Cet point de vente existe déja, veuillez utiliser une autre svp');
+
+            }else{
+                if (Auth::user()->admin == 0) {
+                    Pdv::create([
+                        'fk_zone_id' => $request['fk_zone_id'][0],
+                        'nom_pdv' => $request['nom_pdv'],
+                        'fk_sup_id' => Auth::user()->id,
+                        'fk_proprio_id' => Auth::user()->id,
+                    ]);
+                    
+                    return redirect()->route('pdvs.create')
+                        ->with('success_message', 'Point de vente créer avec success');
+
+                } else if (Auth::user()->admin == 1) {
+                    
+                    // Pdv::create([
+                    //     'fk_zone_id' => $request['fk_zone_id'][0],
+                    //     'nom_pdv' => $request['nom_pdv'],
+                    //     'fk_sup_id' => Auth::user()->id,
+                    //     'fk_proprio_id' => Auth::user()->id,
+                    // ]);
+                    
+                    // return redirect()->route('pdvs.index')
+                    //     ->with('success_message', 'Point de vente créer avec success');
+                        
+                } else {
+                    
+                }
+                
+                
+
+            }
+        } 
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Zone  $pdv
+     * @return \Illuminate\Http\Response
+    */
+
+    public function show($id)
+    {
+        $pdv = Pdv::find($id);
+        $pdvs = Zone::all();
+        $cai = Caisse::where("fk_pdv_id", $id)->get();
+
+        if (!$pdv) return redirect()->route('pdvs.index')
+            ->with('error_message', 'User dengan id'.$id.' tidak ditemukan');
+
+        return view('pdvs.show', [
+            'pdv' => $pdv,
+            'caisses' => $cai,
+        ]);
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Zone  $pdv
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $pdv = Pdv::find($id);
+
+        $zone = Zone::all();
+        if (!$pdv) return redirect()->route('zones.index')
+            ->with('error_message', 'User dengan id'.$id.' tidak ditemukan');
+        return view('pdvs.edit', [
+            'zones' => $zone,
+            'pdv' => $pdv,
+        ]);
+    
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Zone  $pdv
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $pdv = Pdv::find($id);
+        $pdv->nom_pdv = $request->nom_pdv;
+        $pdv->fk_zone_id = $request->fk_zone_id;
+        $pdv->fk_sup_id = Auth::user()->id;
+        // var_dump($request->fk_zone_id);
+        $pdv->save();
+        return redirect()->route('pdvs.index')
+            ->with('success_message', 'Modification effectuée avec success');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Zone  $pdv
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request,$id)
+    {
+        $pdv = Pdv::find($id);
+        if ($pdv) $pdv->delete();
+        return redirect()->route('pdvs.index')
+            ->with('success_message', 'Supprimée');
+    }
+}
