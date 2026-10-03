@@ -621,3 +621,5 @@ Projet présenté à des fins de démonstration, de portfolio et de développeme
 [Laravel Gestion Multiservice](https://github.com/malado04/Laravel-Gestion-multiservice)
 
 ---
+
+WhatApp +221 77 560 42 72 / +221 76 618 15 75
