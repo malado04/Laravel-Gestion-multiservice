@@ -609,6 +609,15 @@ Git / GitHub
 ```
 
 ---
+## 👨‍💻 Auteur
+
+**Amadou Malado Ndiaye**
+
+Ingénieur Logiciel | Développeur Full Stack | Architecture Logicielle
+
+* GitHub : [@malado04](https://github.com/malado04)
+* WhatApp +221 77 560 42 72 / +221 76 618 15 75
+* 
 
 ## 📄 Licence
 
@@ -621,5 +630,4 @@ Projet présenté à des fins de démonstration, de portfolio et de développeme
 [Laravel Gestion Multiservice](https://github.com/malado04/Laravel-Gestion-multiservice)
 
 ---
-
-WhatApp +221 77 560 42 72 / +221 76 618 15 75
+ 
